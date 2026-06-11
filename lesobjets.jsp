@@ -2,11 +2,18 @@
 <html>
 <head>
 <title>Les objets</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor=white>
+<body>
+<header>
+    <span>Les objets</span>
+    <a href="index.html">Retour au sommaire</a>
+</header>
+<div class="container">
+
 <h1>Exercices sur les objets</h1>
 
-<%-- Exercice 5 : Personne avec encapsulation (attributs privés + getters/setters) --%>
 <%!
     class Personne {
         private String nom;
@@ -22,8 +29,6 @@
         }
     }
 %>
-
-<%-- Exercice 1 : Classe Voiture --%>
 <%!
     class Voiture {
         String marque;
@@ -31,40 +36,31 @@
         int annee;
     }
 %>
-
-<%-- Exercice 3 : Classe Rectangle --%>
 <%!
     class Rectangle {
         double longueur;
         double largeur;
-
-        double calculerSurface() {
-            return longueur * largeur;
-        }
+        double calculerSurface() { return longueur * largeur; }
     }
 %>
-
-<%-- Exercice 4 : Classe CompteBancaire --%>
 <%!
     class CompteBancaire {
         double solde;
-
         void deposer(double montant) { solde += montant; }
         void retirer(double montant) { solde -= montant; }
     }
 %>
 
 <form action="#" method="post">
-    <p>Saisir un nom : <input type="text" name="nom">
-    <p>Saisir un âge : <input type="text" name="age">
-    <p><input type="submit" value="Créer la personne">
+    <p>Saisir un nom : <input type="text" name="nom"></p>
+    <p>Saisir un âge : <input type="text" name="age"></p>
+    <p><input type="submit" value="Créer la personne"></p>
 </form>
 
 <% String nom = request.getParameter("nom"); %>
 <% String age = request.getParameter("age"); %>
 <% if (nom != null && age != null && !nom.isEmpty() && !age.isEmpty()) { %>
 
-    <%-- Exercice 5 : utilisation des getters/setters --%>
     <% Personne p = new Personne(); %>
     <% p.setNom(nom); %>
     <% p.setAge(Integer.parseInt(age)); %>
@@ -73,7 +69,6 @@
     <p>Age : <%= p.getAge() %> ans</p>
 
     <h2>Exercice 1 : La classe Voiture</h2>
-    <p>Créer une classe <code>Voiture</code> avec les attributs marque, modele et annee.</p>
     <%
         Voiture v = new Voiture();
         v.marque = "Renault";
@@ -102,9 +97,10 @@
     <p>Solde après dépôt de 100€ et retrait de 30€ : <%= compte.solde %> €</p>
 
     <h2>Exercice 5 : L'encapsulation</h2>
-    <p>La classe Personne utilise des attributs privés avec getters/setters (voir code source).</p>
+    <p>La classe Personne utilise des attributs privés avec getters/setters.</p>
 
 <% } %>
-<p><a href="index.html">Retour au sommaire</a></p>
+
+</div>
 </body>
 </html>
