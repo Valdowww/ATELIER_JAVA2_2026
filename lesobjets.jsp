@@ -5,58 +5,104 @@
 </head>
 <body bgcolor=white>
 <h1>Exercices sur les objets</h1>
+
+<%-- Exercice 5 : Personne avec encapsulation (attributs privés + getters/setters) --%>
+<%!
+    class Personne {
+        private String nom;
+        private int age;
+
+        public String getNom() { return nom; }
+        public void setNom(String nom) { this.nom = nom; }
+        public int getAge() { return age; }
+        public void setAge(int age) { this.age = age; }
+
+        public String seDecrire() {
+            return "Je m'appelle " + nom + " et j'ai " + age + " ans";
+        }
+    }
+%>
+
+<%-- Exercice 1 : Classe Voiture --%>
+<%!
+    class Voiture {
+        String marque;
+        String modele;
+        int annee;
+    }
+%>
+
+<%-- Exercice 3 : Classe Rectangle --%>
+<%!
+    class Rectangle {
+        double longueur;
+        double largeur;
+
+        double calculerSurface() {
+            return longueur * largeur;
+        }
+    }
+%>
+
+<%-- Exercice 4 : Classe CompteBancaire --%>
+<%!
+    class CompteBancaire {
+        double solde;
+
+        void deposer(double montant) { solde += montant; }
+        void retirer(double montant) { solde -= montant; }
+    }
+%>
+
 <form action="#" method="post">
     <p>Saisir un nom : <input type="text" name="nom">
     <p>Saisir un âge : <input type="text" name="age">
     <p><input type="submit" value="Créer la personne">
 </form>
 
-<%-- Déclaration d'une classe Personne avec deux attributs --%>
-<%!
-    class Personne {
-        String nom;
-        int age;
-    }
-%>
-
-<%-- Récupération des valeurs du formulaire --%>
 <% String nom = request.getParameter("nom"); %>
 <% String age = request.getParameter("age"); %>
-
 <% if (nom != null && age != null && !nom.isEmpty() && !age.isEmpty()) { %>
 
-    <%-- Instanciation d'un objet Personne et affectation des attributs --%>
+    <%-- Exercice 5 : utilisation des getters/setters --%>
     <% Personne p = new Personne(); %>
-    <% p.nom = nom; %>
-    <% p.age = Integer.parseInt(age); %>
-
+    <% p.setNom(nom); %>
+    <% p.setAge(Integer.parseInt(age)); %>
     <p>Objet Personne créé !</p>
-    <p>Nom : <%= p.nom %></p>
-    <p>Age : <%= p.age %> ans</p>
+    <p>Nom : <%= p.getNom() %></p>
+    <p>Age : <%= p.getAge() %> ans</p>
 
-<h2>Exercice 1 : La classe Voiture</h2>
-<p>Créer une classe <code>Voiture</code> avec les attributs <code>marque</code>, <code>modele</code> et <code>annee</code>.</br>
-Instancier une voiture, lui affecter des valeurs et afficher ses caractéristiques.</p>
+    <h2>Exercice 1 : La classe Voiture</h2>
+    <p>Créer une classe <code>Voiture</code> avec les attributs marque, modele et annee.</p>
+    <%
+        Voiture v = new Voiture();
+        v.marque = "Renault";
+        v.modele = "Clio";
+        v.annee = 2020;
+    %>
+    <p>Marque : <%= v.marque %>, Modèle : <%= v.modele %>, Année : <%= v.annee %></p>
 
-<h2>Exercice 2 : Ajouter une méthode à la classe Personne</h2>
-<p>Ajouter à la classe <code>Personne</code> une méthode <code>seDecrire()</code> qui retourne une chaîne du type :</br>
-"Je m'appelle Marie et j'ai 25 ans".</br>
-Appeler cette méthode sur l'objet <code>p</code> et afficher le résultat.</p>
+    <h2>Exercice 2 : Ajouter une méthode à la classe Personne</h2>
+    <p>Résultat de seDecrire() : <%= p.seDecrire() %></p>
 
-<h2>Exercice 3 : La classe Rectangle</h2>
-<p>Créer une classe <code>Rectangle</code> avec les attributs <code>longueur</code> et <code>largeur</code>.</br>
-Ajouter une méthode <code>calculerSurface()</code> qui retourne la surface du rectangle.</br>
-Créer un rectangle de 5 par 3 et afficher sa surface.</p>
+    <h2>Exercice 3 : La classe Rectangle</h2>
+    <%
+        Rectangle r = new Rectangle();
+        r.longueur = 5;
+        r.largeur = 3;
+    %>
+    <p>Surface du rectangle (5x3) : <%= r.calculerSurface() %></p>
 
-<h2>Exercice 4 : Le compte bancaire</h2>
-<p>Créer une classe <code>CompteBancaire</code> avec un attribut <code>solde</code>.</br>
-Ajouter deux méthodes : <code>deposer(double montant)</code> et <code>retirer(double montant)</code>.</br>
-Créer un compte, déposer 100€, retirer 30€, puis afficher le solde final.</p>
+    <h2>Exercice 4 : Le compte bancaire</h2>
+    <%
+        CompteBancaire compte = new CompteBancaire();
+        compte.deposer(100);
+        compte.retirer(30);
+    %>
+    <p>Solde après dépôt de 100€ et retrait de 30€ : <%= compte.solde %> €</p>
 
-<h2>Exercice 5 : L'encapsulation</h2>
-<p>Modifier la classe <code>Personne</code> pour rendre les attributs <code>privés</code>.</br>
-Ajouter les getters et setters correspondants : <code>getNom()</code>, <code>setNom(...)</code>, <code>getAge()</code>, <code>setAge(...)</code>.</br>
-Adapter ensuite le code de la page pour utiliser ces accesseurs au lieu d'accéder directement aux attributs.</p>
+    <h2>Exercice 5 : L'encapsulation</h2>
+    <p>La classe Personne utilise des attributs privés avec getters/setters (voir code source).</p>
 
 <% } %>
 <p><a href="index.html">Retour au sommaire</a></p>
