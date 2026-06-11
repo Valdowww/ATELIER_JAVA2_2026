@@ -7,8 +7,13 @@
 </head>
 <body>
 <header>
-    <span>Les constructeurs</span>
-    <a href="index.html">Retour au sommaire</a>
+    <span>Exercices Java POO</span>
+    <nav>
+        <a href="index.html">Sommaire</a>
+        <a href="lesobjets.jsp">Les objets</a>
+        <a href="lesconstructeurs.jsp">Les constructeurs</a>
+        <a href="lepolymorphisme.jsp">Le polymorphisme</a>
+    </nav>
 </header>
 <div class="container">
 
