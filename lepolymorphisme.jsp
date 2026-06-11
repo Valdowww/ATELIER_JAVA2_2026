@@ -2,16 +2,23 @@
 <html>
 <head>
 <title>Le polymorphisme</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor=white>
+<body>
+<header>
+    <span>Le polymorphisme</span>
+    <a href="index.html">Retour au sommaire</a>
+</header>
+<div class="container">
+
 <h1>Exercices sur le polymorphisme</h1>
-<form action="#" method="post">
-    <p>Saisir le nom d'un chien : <input type="text" name="chien">
-    <p>Saisir le nom d'un chat : <input type="text" name="chat">
-    <p><input type="submit" value="Faire crier les animaux">
-</form>
 
 <%!
+    interface Affichable {
+        String afficher();
+    }
+
     class Animal {
         String nom;
         public Animal(String nom) { this.nom = nom; }
@@ -33,14 +40,12 @@
         public String afficher() { return toString() + " - " + crier(); }
     }
 
-    // Exercice 4 : Oiseau
     class Oiseau extends Animal {
         public Oiseau(String nom) { super(nom); }
         public String crier() { return "Cui cui !"; }
         public String toString() { return "Oiseau nommé " + nom; }
     }
 
-    // Exercice 2 : classe abstraite Forme
     abstract class Forme {
         abstract double aire();
     }
@@ -56,18 +61,18 @@
         public Carre(double cote) { this.cote = cote; }
         public double aire() { return cote * cote; }
     }
-
-    // Exercice 3 : interface Affichable
-    interface Affichable {
-        String afficher();
-    }
 %>
+
+<form action="#" method="post">
+    <p>Saisir le nom d'un chien : <input type="text" name="chien"></p>
+    <p>Saisir le nom d'un chat : <input type="text" name="chat"></p>
+    <p><input type="submit" value="Faire crier les animaux"></p>
+</form>
 
 <% String chien = request.getParameter("chien"); %>
 <% String chat = request.getParameter("chat"); %>
 <% if (chien != null && chat != null && !chien.isEmpty() && !chat.isEmpty()) { %>
 
-    <%-- Exercice 4 : tableau avec Oiseau ajouté --%>
     <% Animal[] animaux = { new Chien(chien), new Chat(chat), new Oiseau("Tweety") }; %>
     <p>Démonstration du polymorphisme :</p>
     <% for (Animal a : animaux) { %>
@@ -80,17 +85,13 @@
     <% } %>
 
     <h2>Exercice 2 : La classe abstraite Forme</h2>
-    <%
-        Forme[] formes = { new Cercle(5), new Carre(4) };
-    %>
+    <% Forme[] formes = { new Cercle(5), new Carre(4) }; %>
     <% for (Forme f : formes) { %>
         <p>Aire : <%= String.format("%.2f", f.aire()) %></p>
     <% } %>
 
     <h2>Exercice 3 : L'interface Affichable</h2>
-    <%
-        Affichable[] affichables = { new Chien(chien), new Chat(chat) };
-    %>
+    <% Affichable[] affichables = { new Chien(chien), new Chat(chat) }; %>
     <% for (Affichable af : affichables) { %>
         <p><%= af.afficher() %></p>
     <% } %>
@@ -110,6 +111,7 @@
     <% } %>
 
 <% } %>
-<p><a href="index.html">Retour au sommaire</a></p>
+
+</div>
 </body>
 </html>
