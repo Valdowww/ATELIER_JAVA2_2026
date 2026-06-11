@@ -9,20 +9,30 @@ body {
 header {
     background: #2c3e50;
     color: white;
-    padding: 12px 30px;
+    padding: 18px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-header a {
-    color: #aed6f1;
-    text-decoration: none;
-    font-size: 14px;
+header span {
+    font-size: 22px;
+    font-weight: bold;
 }
 
-header a:hover { text-decoration: underline; }
-header span { font-size: 18px; font-weight: bold; }
+nav {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+nav a {
+    color: #aed6f1;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+nav a:hover { text-decoration: underline; }
 
 .container {
     max-width: 800px;
