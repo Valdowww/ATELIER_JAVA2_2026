@@ -3,6 +3,7 @@
 Application web JSP servant de support aux exercices de **programmation orientée
 objet** en Java (objets, constructeurs, polymorphisme).
 
+
 Le déploiement se fait automatiquement sur un serveur Tomcat hébergé sur AWS EC2,
 via GitHub Actions, à chaque `Commit` sur votre dépôt.
 
